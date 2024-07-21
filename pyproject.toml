@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "gatherspecimens"
+version = "0.1.0"
+description = ""
+authors = ["Max Dymond <maxmakesmagic@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+wayback = "^0.4.5"
+sqlalchemy = "^2.0.31"
+psycopg2-binary = "^2.9.9"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
