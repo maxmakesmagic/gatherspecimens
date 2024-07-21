@@ -1,19 +1,22 @@
+"""Retrieves CDX records from Wayback Machine for a list of URLs."""
+
 import json
 import logging
 import time
 from typing import Generator, Iterator
 
 import wayback
-from sqlalchemy import Engine, create_engine
+from sqlalchemy import Engine
 from sqlalchemy.orm import Session
 
-from schema import Base, StoredCdxRecord
-from utils import common_logging, url_hash
+from .schema import Base, StoredCdxRecord
+from .utils import common_logging, get_engine, url_hash
 
 log = logging.getLogger(__name__)
 
 
 def process_results(results: Iterator[wayback.CdxRecord], engine: Engine):
+    """Iterate over CDX records and stores them in the database."""
     added = 0
 
     with Session(engine) as db_session:
@@ -41,6 +44,7 @@ def process_results(results: Iterator[wayback.CdxRecord], engine: Engine):
 
 
 def process_url(url: str, engine: Engine):
+    """Process a URL and store found CDX records in the database."""
     session = wayback.WaybackSession(retries=20, backoff=0.5)
     client = wayback.WaybackClient(session=session)
 
@@ -49,21 +53,8 @@ def process_url(url: str, engine: Engine):
 
 
 def main():
-    with open("config.json", "rb") as f:
-        creds = json.load(f)
-    connection_string = f"postgresql+psycopg2://{creds['user']}:{creds['pass']}@{creds['host']}:{creds['port']}/{creds['database']}"
-
-    log.info("Connection string: %s", connection_string)
-
-    # engine = create_engine(connection_string, echo=True)
-    # Base.metadata.drop_all(engine)
-    # return
-
-    # engine = create_engine(connection_string, echo=True)
-    # Base.metadata.create_all(engine)
-    # return
-
-    engine = create_engine(connection_string)
+    """Process URLs for CDX records."""
+    engine = get_engine("config.json")
     Base.metadata.create_all(engine)
 
     with open("input.json", "r") as f:
@@ -76,13 +67,14 @@ def main():
             try:
                 process_url(url, engine)
                 break
-            except Exception as e:
+            except Exception:
                 log.exception("Error while processing; sleep a while")
                 time.sleep(60)
 
 
 def run():
-    common_logging("cdxrecords")
+    """Run the main function with common logging."""
+    common_logging(__name__, __file__)
     main()
 
 

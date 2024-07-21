@@ -1,27 +1,25 @@
+"""SQLAlchemy schema for the gatherspecimens package."""
+
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import (
-    DateTime,
-    Engine,
-    Index,
-    Integer,
-    LargeBinary,
-    String,
-    UnicodeText,
-    create_engine,
-)
-from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
+from sqlalchemy import DateTime, Integer, LargeBinary, String, UnicodeText
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from typing_extensions import Self
 from wayback import CdxRecord
 
-from utils import url_hash
+from .utils import url_hash
 
 
 class Base(DeclarativeBase):
+    """Base class for SQLAlchemy models."""
+
     pass
 
 
 class StoredCdxRecord(Base):
+    """Model for storing CDX records in the database."""
+
     __tablename__ = "stored_cdx_record"
 
     hash_raw_url: Mapped[str] = mapped_column(String(64), primary_key=True)
@@ -36,7 +34,8 @@ class StoredCdxRecord(Base):
     view_url: Mapped[str] = mapped_column(UnicodeText)
 
     @classmethod
-    def from_cdx_record(cls, record: CdxRecord) -> "StoredCdxRecord":
+    def from_cdx_record(cls, record: CdxRecord) -> Self:
+        """Create a new instance from a CdxRecord."""
         return cls(
             hash_raw_url=url_hash(record.raw_url),
             key=record.key,
@@ -50,8 +49,24 @@ class StoredCdxRecord(Base):
             view_url=record.view_url,
         )
 
+    def to_cdx_record(self) -> CdxRecord:
+        """Convert the instance to a CdxRecord."""
+        return CdxRecord(
+            key=self.key,
+            timestamp=self.timestamp,
+            url=self.url,
+            mime_type=self.mime_type,
+            status_code=self.status_code,
+            digest=self.digest,
+            length=self.length,
+            raw_url=self.raw_url,
+            view_url=self.view_url,
+        )
+
 
 class Scraped(Base):
+    """Model for storing scraped pages in the database."""
+
     __tablename__ = "scraped"
 
     hash_raw_url: Mapped[str] = mapped_column(String(64), primary_key=True)

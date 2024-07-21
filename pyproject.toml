@@ -6,7 +6,7 @@ authors = ["Max Dymond <maxmakesmagic@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.8.2"
 wayback = "^0.4.5"
 sqlalchemy = "^2.0.31"
 psycopg2-binary = "^2.9.9"
@@ -15,7 +15,19 @@ psycopg2-binary = "^2.9.9"
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
 isort = "^5.13.2"
+flake8 = "^7.1.0"
+mypy = "^1.11.0"
+flake8-isort = "^6.1.1"
+flake8-docstrings = "^1.7.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+cdxrecords = "gatherspecimens.cdxrecords:run"
+counter = "gatherspecimens.counter:run"
+
+[[tool.mypy.overrides]]
+module = "wayback.*"
+ignore_missing_imports = true

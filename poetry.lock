@@ -187,6 +187,58 @@ files = [
 ]
 
 [[package]]
+name = "flake8"
+version = "7.1.0"
+description = "the modular source code checker: pep8 pyflakes and co"
+category = "dev"
+optional = false
+python-versions = ">=3.8.1"
+files = [
+    {file = "flake8-7.1.0-py2.py3-none-any.whl", hash = "sha256:2e416edcc62471a64cea09353f4e7bdba32aeb079b6e360554c659a122b1bc6a"},
+    {file = "flake8-7.1.0.tar.gz", hash = "sha256:48a07b626b55236e0fb4784ee69a465fbf59d79eec1f5b4785c3d3bc57d17aa5"},
+]
+
+[package.dependencies]
+mccabe = ">=0.7.0,<0.8.0"
+pycodestyle = ">=2.12.0,<2.13.0"
+pyflakes = ">=3.2.0,<3.3.0"
+
+[[package]]
+name = "flake8-docstrings"
+version = "1.7.0"
+description = "Extension for flake8 which uses pydocstyle to check docstrings"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "flake8_docstrings-1.7.0-py2.py3-none-any.whl", hash = "sha256:51f2344026da083fc084166a9353f5082b01f72901df422f74b4d953ae88ac75"},
+    {file = "flake8_docstrings-1.7.0.tar.gz", hash = "sha256:4c8cc748dc16e6869728699e5d0d685da9a10b0ea718e090b1ba088e67a941af"},
+]
+
+[package.dependencies]
+flake8 = ">=3"
+pydocstyle = ">=2.1"
+
+[[package]]
+name = "flake8-isort"
+version = "6.1.1"
+description = "flake8 plugin that integrates isort"
+category = "dev"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "flake8_isort-6.1.1-py3-none-any.whl", hash = "sha256:0fec4dc3a15aefbdbe4012e51d5531a2eb5fa8b981cdfbc882296a59b54ede12"},
+    {file = "flake8_isort-6.1.1.tar.gz", hash = "sha256:c1f82f3cf06a80c13e1d09bfae460e9666255d5c780b859f19f8318d420370b3"},
+]
+
+[package.dependencies]
+flake8 = "*"
+isort = ">=5.0.0,<6"
+
+[package.extras]
+test = ["pytest"]
+
+[[package]]
 name = "greenlet"
 version = "3.0.3"
 description = "Lightweight in-process concurrent programming"
@@ -284,6 +336,66 @@ files = [
 
 [package.extras]
 colors = ["colorama (>=0.4.6)"]
+
+[[package]]
+name = "mccabe"
+version = "0.7.0"
+description = "McCabe checker, plugin for flake8"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
+    {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
+]
+
+[[package]]
+name = "mypy"
+version = "1.11.0"
+description = "Optional static typing for Python"
+category = "dev"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "mypy-1.11.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:a3824187c99b893f90c845bab405a585d1ced4ff55421fdf5c84cb7710995229"},
+    {file = "mypy-1.11.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:96f8dbc2c85046c81bcddc246232d500ad729cb720da4e20fce3b542cab91287"},
+    {file = "mypy-1.11.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:1a5d8d8dd8613a3e2be3eae829ee891b6b2de6302f24766ff06cb2875f5be9c6"},
+    {file = "mypy-1.11.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:72596a79bbfb195fd41405cffa18210af3811beb91ff946dbcb7368240eed6be"},
+    {file = "mypy-1.11.0-cp310-cp310-win_amd64.whl", hash = "sha256:35ce88b8ed3a759634cb4eb646d002c4cef0a38f20565ee82b5023558eb90c00"},
+    {file = "mypy-1.11.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:98790025861cb2c3db8c2f5ad10fc8c336ed2a55f4daf1b8b3f877826b6ff2eb"},
+    {file = "mypy-1.11.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:25bcfa75b9b5a5f8d67147a54ea97ed63a653995a82798221cca2a315c0238c1"},
+    {file = "mypy-1.11.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0bea2a0e71c2a375c9fa0ede3d98324214d67b3cbbfcbd55ac8f750f85a414e3"},
+    {file = "mypy-1.11.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:d2b3d36baac48e40e3064d2901f2fbd2a2d6880ec6ce6358825c85031d7c0d4d"},
+    {file = "mypy-1.11.0-cp311-cp311-win_amd64.whl", hash = "sha256:d8e2e43977f0e09f149ea69fd0556623919f816764e26d74da0c8a7b48f3e18a"},
+    {file = "mypy-1.11.0-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:1d44c1e44a8be986b54b09f15f2c1a66368eb43861b4e82573026e04c48a9e20"},
+    {file = "mypy-1.11.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:cea3d0fb69637944dd321f41bc896e11d0fb0b0aa531d887a6da70f6e7473aba"},
+    {file = "mypy-1.11.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a83ec98ae12d51c252be61521aa5731f5512231d0b738b4cb2498344f0b840cd"},
+    {file = "mypy-1.11.0-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:c7b73a856522417beb78e0fb6d33ef89474e7a622db2653bc1285af36e2e3e3d"},
+    {file = "mypy-1.11.0-cp312-cp312-win_amd64.whl", hash = "sha256:f2268d9fcd9686b61ab64f077be7ffbc6fbcdfb4103e5dd0cc5eaab53a8886c2"},
+    {file = "mypy-1.11.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:940bfff7283c267ae6522ef926a7887305945f716a7704d3344d6d07f02df850"},
+    {file = "mypy-1.11.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:14f9294528b5f5cf96c721f231c9f5b2733164e02c1c018ed1a0eff8a18005ac"},
+    {file = "mypy-1.11.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d7b54c27783991399046837df5c7c9d325d921394757d09dbcbf96aee4649fe9"},
+    {file = "mypy-1.11.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:65f190a6349dec29c8d1a1cd4aa71284177aee5949e0502e6379b42873eddbe7"},
+    {file = "mypy-1.11.0-cp38-cp38-win_amd64.whl", hash = "sha256:dbe286303241fea8c2ea5466f6e0e6a046a135a7e7609167b07fd4e7baf151bf"},
+    {file = "mypy-1.11.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:104e9c1620c2675420abd1f6c44bab7dd33cc85aea751c985006e83dcd001095"},
+    {file = "mypy-1.11.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:f006e955718ecd8d159cee9932b64fba8f86ee6f7728ca3ac66c3a54b0062abe"},
+    {file = "mypy-1.11.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:becc9111ca572b04e7e77131bc708480cc88a911adf3d0239f974c034b78085c"},
+    {file = "mypy-1.11.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:6801319fe76c3f3a3833f2b5af7bd2c17bb93c00026a2a1b924e6762f5b19e13"},
+    {file = "mypy-1.11.0-cp39-cp39-win_amd64.whl", hash = "sha256:c1a184c64521dc549324ec6ef7cbaa6b351912be9cb5edb803c2808a0d7e85ac"},
+    {file = "mypy-1.11.0-py3-none-any.whl", hash = "sha256:56913ec8c7638b0091ef4da6fcc9136896914a9d60d54670a75880c3e5b99ace"},
+    {file = "mypy-1.11.0.tar.gz", hash = "sha256:93743608c7348772fdc717af4aeee1997293a1ad04bc0ea6efa15bf65385c538"},
+]
+
+[package.dependencies]
+mypy-extensions = ">=1.0.0"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+typing-extensions = ">=4.6.0"
+
+[package.extras]
+dmypy = ["psutil (>=4.0)"]
+install-types = ["pip"]
+mypyc = ["setuptools (>=50)"]
+reports = ["lxml"]
 
 [[package]]
 name = "mypy-extensions"
@@ -421,6 +533,48 @@ files = [
 ]
 
 [[package]]
+name = "pycodestyle"
+version = "2.12.0"
+description = "Python style guide checker"
+category = "dev"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pycodestyle-2.12.0-py2.py3-none-any.whl", hash = "sha256:949a39f6b86c3e1515ba1787c2022131d165a8ad271b11370a8819aa070269e4"},
+    {file = "pycodestyle-2.12.0.tar.gz", hash = "sha256:442f950141b4f43df752dd303511ffded3a04c2b6fb7f65980574f0c31e6e79c"},
+]
+
+[[package]]
+name = "pydocstyle"
+version = "6.3.0"
+description = "Python docstring style checker"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
+    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
+]
+
+[package.dependencies]
+snowballstemmer = ">=2.2.0"
+
+[package.extras]
+toml = ["tomli (>=1.2.3)"]
+
+[[package]]
+name = "pyflakes"
+version = "3.2.0"
+description = "passive checker of Python programs"
+category = "dev"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pyflakes-3.2.0-py2.py3-none-any.whl", hash = "sha256:84b5be138a2dfbb40689ca07e2152deb896a65c3a3e24c251c5c62489568074a"},
+    {file = "pyflakes-3.2.0.tar.gz", hash = "sha256:1c61603ff154621fb2a9172037d84dca3500def8c8b630657d1701f026f8af3f"},
+]
+
+[[package]]
 name = "requests"
 version = "2.32.3"
 description = "Python HTTP for Humans."
@@ -441,6 +595,18 @@ urllib3 = ">=1.21.1,<3"
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
+name = "snowballstemmer"
+version = "2.2.0"
+description = "This package provides 29 stemmers for 28 languages generated from Snowball algorithms."
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "snowballstemmer-2.2.0-py2.py3-none-any.whl", hash = "sha256:c8e1716e83cc398ae16824e5572ae04e0d9fc2c6b985fb0f900f5f0c96ecba1a"},
+    {file = "snowballstemmer-2.2.0.tar.gz", hash = "sha256:09b16deb8547d3412ad7b590689584cd0fe25ec8db3be37788be3810cbf19cb1"},
+]
 
 [[package]]
 name = "sqlalchemy"
@@ -595,5 +761,5 @@ test = ["codecov", "coverage", "pytest", "requests-mock", "setuptools", "vcrpy"]
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.8"
-content-hash = "8b22bd1b7b203afd2f2ef93fce87237d114387e6837d35130f9bc52169fbef4e"
+python-versions = "^3.8.2"
+content-hash = "1c7cebd8beb1390bb1ab9fb5009bfc68130b9d7cdb7491728ca5d73b1689b779"

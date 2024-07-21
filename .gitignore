@@ -4,3 +4,4 @@ logs/
 nomemento/
 *.json
 initmachine.sh
+*.py3

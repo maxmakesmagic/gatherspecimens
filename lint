@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+# Auto-run isort.
+isort src/
+
+# Run flake8
+flake8 src/
+
+# Run mypy
+mypy src/
+
+echo "All linting checks passed!"
