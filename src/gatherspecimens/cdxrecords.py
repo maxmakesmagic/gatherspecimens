@@ -1,7 +1,9 @@
 """Retrieves CDX records from Wayback Machine for a list of URLs."""
 
+import argparse
 import json
 import logging
+from pathlib import Path
 import time
 from typing import Generator, Iterator
 
@@ -43,21 +45,44 @@ def process_results(results: Iterator[wayback.CdxRecord], engine: Engine):
                 db_session.commit()
 
 
-def process_url(url: str, engine: Engine):
+def process_url(url: str, engine: Engine, api_limit: int):
     """Process a URL and store found CDX records in the database."""
     session = wayback.WaybackSession(retries=20, backoff=0.5)
     client = wayback.WaybackClient(session=session)
 
-    results: Generator[wayback.CdxRecord] = client.search(url, match_type="prefix")
+    results: Generator[wayback.CdxRecord] = client.search(
+        url, match_type="prefix", limit=api_limit
+    )
     process_results(results, engine)
 
 
 def main():
     """Process URLs for CDX records."""
-    engine = get_engine("config.json")
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--config",
+        help="Path to the database configuration file",
+        type=Path,
+        default=Path("config.json"),
+    )
+    parser.add_argument(
+        "--input",
+        help="Path to the URL input file",
+        type=Path,
+        default=Path("input.json"),
+    )
+    parser.add_argument(
+        "--limit",
+        help="API limit for Wayback Machine",
+        default=1000,
+    )
+    args = parser.parse_args()
+
+    engine = get_engine(args.config)
     Base.metadata.create_all(engine)
 
-    with open("input.json", "r") as f:
+    with open(args.input, "r") as f:
         urls = json.load(f)
 
     for url in urls:
@@ -65,7 +90,7 @@ def main():
 
         while True:
             try:
-                process_url(url, engine)
+                process_url(url, engine, args.limit)
                 break
             except Exception:
                 log.exception("Error while processing; sleep a while")
