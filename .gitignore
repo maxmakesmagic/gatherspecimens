@@ -3,5 +3,6 @@ __pycache__
 logs/
 nomemento/
 *.json
-initmachine.sh
+*.sh
 *.py3
+celeryconfig.py

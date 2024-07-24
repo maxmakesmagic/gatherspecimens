@@ -10,6 +10,9 @@ python = "^3.8.2"
 wayback = "^0.4.5"
 sqlalchemy = "^2.0.31"
 psycopg2-binary = "^2.9.9"
+celery = {version = "^5.4.0", extras = ["redis", "gevent"]}
+tqdm = "^4.66.4"
+types-tqdm = "^4.66.0.20240417"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -30,4 +33,8 @@ counter = "gatherspecimens.counter:run"
 
 [[tool.mypy.overrides]]
 module = "wayback.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "celery.*"
 ignore_missing_imports = true

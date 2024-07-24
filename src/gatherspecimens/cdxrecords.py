@@ -3,16 +3,16 @@
 import argparse
 import json
 import logging
-from pathlib import Path
 import time
+from pathlib import Path
 from typing import Generator, Iterator
 
 import wayback
 from sqlalchemy import Engine
 from sqlalchemy.orm import Session
 
-from .schema import Base, StoredCdxRecord
-from .utils import common_logging, get_engine, url_hash
+from gatherspecimens.schema import Base, CdxRecordSpecimen
+from gatherspecimens.utils import common_logging, get_engine, url_hash
 
 log = logging.getLogger(__name__)
 
@@ -29,14 +29,14 @@ def process_results(results: Iterator[wayback.CdxRecord], engine: Engine):
                 log.info("[%d] Checking record", index)
 
             if (
-                db_session.query(StoredCdxRecord)
-                .filter(StoredCdxRecord.hash_raw_url == raw_hash)
+                db_session.query(CdxRecordSpecimen)
+                .filter(CdxRecordSpecimen.hash_raw_url == raw_hash)
                 .first()
             ):
                 # log.info("[%s] Record %s already scraped", run_id, record)
                 continue
 
-            new_record = StoredCdxRecord.from_cdx_record(record)
+            new_record = CdxRecordSpecimen.from_cdx_record(record)
             db_session.add(new_record)
             added += 1
 
@@ -58,7 +58,6 @@ def process_url(url: str, engine: Engine, api_limit: int):
 
 def main():
     """Process URLs for CDX records."""
-
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--config",

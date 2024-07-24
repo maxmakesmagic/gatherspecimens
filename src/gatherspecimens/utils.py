@@ -26,7 +26,7 @@ def nospecial(url: str) -> str:
     return re.sub(r"[^a-zA-Z0-9\_\-]+", "_", url)
 
 
-def common_logging(name: str, filename: str):
+def common_logging(name: str, filename: str, level: int = logging.DEBUG):
     """Set up common logging for scripts."""
     if name == "__main__":
         name = Path(filename).stem
@@ -35,7 +35,7 @@ def common_logging(name: str, filename: str):
 
     stream_handler = logging.StreamHandler(sys.stdout)
     stream_handler.setFormatter(formatter)
-    stream_handler.setLevel(logging.DEBUG)
+    stream_handler.setLevel(level)
 
     # Get the current timestamp
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -58,7 +58,7 @@ def common_logging(name: str, filename: str):
     logging.getLogger("wayback").setLevel(logging.INFO)
 
 
-def get_engine(config_file: Path) -> Engine:
+def get_engine(config_file: Path, echo: bool = False) -> Engine:
     """Create an SQLAlchemy engine from a JSON configuration."""
     with open(config_file, "r") as f:
         creds = json.load(f)
@@ -67,7 +67,12 @@ def get_engine(config_file: Path) -> Engine:
         f"{creds['pass']}@{creds['host']}:{creds['port']}"
         f"/{creds['database']}"
     )
+    safe_connection_string = (
+        f"postgresql+psycopg2://{creds['user']}:"
+        f"****@{creds['host']}:{creds['port']}"
+        f"/{creds['database']}"
+    )
 
-    log.debug("Connection string: %s", connection_string.replace(creds["pass"], "****"))
-    engine = create_engine(connection_string)
+    log.debug("Connection string: %s", safe_connection_string)
+    engine = create_engine(connection_string, echo=echo)
     return engine
