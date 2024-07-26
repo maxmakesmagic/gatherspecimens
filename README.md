@@ -4,6 +4,8 @@ Gather Specimens
 This project gathers records from the Wayback Machine and stores them in a database
 for extra processing.
 
+For Wizards-specific information, check out [WIZARDS.md](WIZARDS.md).
+
 # Configuration
 
 ## config.json
