@@ -3,12 +3,12 @@
 set -euxo pipefail
 
 # Auto-run isort.
-isort src/ *.py
+isort src/ tests/ *.py
 
 # Run flake8
-flake8 src/ *.py
+flake8 src/ tests/ *.py
 
 # Run mypy
-mypy src/ *.py
+mypy src/ tests/ *.py
 
 echo "All linting checks passed!"
