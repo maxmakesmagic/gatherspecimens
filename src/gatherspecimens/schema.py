@@ -1,5 +1,6 @@
 """SQLAlchemy schema for the gatherspecimens package."""
 
+import base64
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
@@ -112,6 +113,37 @@ class MementoSpecimen(Base):
     time: Mapped[datetime] = mapped_column(DateTime)
     view_url: Mapped[str] = mapped_column(UnicodeText)
     html_content: Mapped[bytes] = mapped_column(LargeBinary)
+
+    def to_serializable(self) -> Dict[str, Any]:
+        """Convert the instance to a serializable dictionary."""
+        base64_content = base64.b64encode(self.html_content).decode("utf-8")
+        return {
+            "id": self.id,
+            "hash_raw_url": self.hash_raw_url,
+            "raw_url": self.raw_url,
+            "url": self.url,
+            "mime_type": self.mime_type,
+            "status_code": self.status_code,
+            "time": self.time,
+            "view_url": self.view_url,
+            "html_content": base64_content,
+        }
+
+    @classmethod
+    def from_serializable(cls, data: Dict[str, Any]) -> Self:
+        """Create a new instance from a serializable dictionary."""
+        content = base64.b64decode(data["html_content"])
+        return cls(
+            id=data["id"],
+            hash_raw_url=data["hash_raw_url"],
+            raw_url=data["raw_url"],
+            url=data["url"],
+            mime_type=data["mime_type"],
+            status_code=data["status_code"],
+            time=data["time"],
+            view_url=data["view_url"],
+            html_content=content,
+        )
 
 
 class MementoFailure(Base):
